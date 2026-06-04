@@ -6,19 +6,28 @@ export default function Hero() {
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-900/10 rounded-full blur-3xl" />
+        {/* Grid overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
       </div>
 
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         {/* Text */}
-        <div className="text-center md:text-left">
+        <div className="text-center md:text-left animate-fade-in-up">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-medium mb-6">
-            <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
             Available for work
           </p>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-4">
             Hi, I&apos;m{" "}
-            <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-              Alex Rivera
+            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Kyle
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-400 font-light mb-8">
@@ -32,13 +41,13 @@ export default function Hero() {
           <div className="flex flex-wrap gap-4 justify-center md:justify-start">
             <a
               href="#projects"
-              className="px-6 py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 font-semibold transition-colors duration-200 shadow-lg shadow-indigo-600/30"
+              className="px-6 py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 font-semibold transition-all duration-200 shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/40 hover:-translate-y-0.5"
             >
               View My Work
             </a>
             <a
               href="#contact"
-              className="px-6 py-3 rounded-full border border-white/10 hover:border-white/30 text-gray-300 hover:text-white font-semibold transition-colors duration-200"
+              className="px-6 py-3 rounded-full border border-white/10 hover:border-indigo-400/50 text-gray-300 hover:text-white font-semibold transition-all duration-200 hover:-translate-y-0.5"
             >
               Get In Touch
             </a>
@@ -70,7 +79,7 @@ export default function Hero() {
                 href: "#",
                 icon: (
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 ),
               },
@@ -79,7 +88,7 @@ export default function Hero() {
                 key={s.label}
                 href={s.href}
                 aria-label={s.label}
-                className="text-gray-500 hover:text-indigo-400 transition-colors duration-200"
+                className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-indigo-400/50 hover:bg-indigo-500/10 transition-all duration-200"
               >
                 {s.icon}
               </a>
@@ -87,41 +96,21 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Avatar */}
+        {/* Avatar / visual */}
         <div className="flex justify-center md:justify-end">
           <div className="relative">
             {/* Glow ring */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 blur-2xl opacity-40 scale-110" />
-            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 p-1 shadow-2xl shadow-indigo-500/30">
-              <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center overflow-hidden">
-                {/* Placeholder avatar illustration */}
-                <svg
-                  viewBox="0 0 200 200"
-                  className="w-full h-full"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect width="200" height="200" fill="#1e1b4b" rx="100" />
-                  {/* Body */}
-                  <ellipse cx="100" cy="160" rx="55" ry="35" fill="#312e81" />
-                  {/* Head */}
-                  <circle cx="100" cy="80" r="38" fill="#4f46e5" />
-                  {/* Face highlights */}
-                  <circle cx="88" cy="76" r="5" fill="white" opacity="0.8" />
-                  <circle cx="112" cy="76" r="5" fill="white" opacity="0.8" />
-                  <path d="M88 96 Q100 108 112 96" stroke="white" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.8" />
-                  {/* Hair */}
-                  <path d="M62 72 Q65 42 100 40 Q135 42 138 72 Q130 55 100 55 Q70 55 62 72Z" fill="#312e81" />
-                </svg>
-              </div>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 blur-2xl opacity-30 scale-110" />
+            {/* Avatar circle */}
+            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-600/20 border border-white/10 flex items-center justify-center overflow-hidden">
+              <span className="text-8xl md:text-9xl select-none">👨‍💻</span>
             </div>
-
-            {/* Floating badges */}
-            <div className="absolute -top-4 -right-4 bg-gray-800 border border-white/10 rounded-2xl px-3 py-2 shadow-xl">
+            {/* Floating badge */}
+            <div className="absolute -bottom-4 -left-4 bg-gray-900 border border-white/10 rounded-2xl px-4 py-2 shadow-xl">
               <p className="text-xs text-gray-400">Experience</p>
-              <p className="text-lg font-bold text-white">5+ yrs</p>
+              <p className="text-lg font-bold text-white">5+ Years</p>
             </div>
-            <div className="absolute -bottom-4 -left-4 bg-gray-800 border border-white/10 rounded-2xl px-3 py-2 shadow-xl">
+            <div className="absolute -top-4 -right-4 bg-gray-900 border border-white/10 rounded-2xl px-4 py-2 shadow-xl">
               <p className="text-xs text-gray-400">Projects</p>
               <p className="text-lg font-bold text-white">40+</p>
             </div>
@@ -130,9 +119,9 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-600">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-500">
         <span className="text-xs tracking-widest uppercase">Scroll</span>
-        <div className="w-px h-10 bg-gradient-to-b from-gray-600 to-transparent" />
+        <div className="w-px h-10 bg-gradient-to-b from-gray-500 to-transparent animate-pulse" />
       </div>
     </section>
   );
