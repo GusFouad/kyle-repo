@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Yellow & purple login page",
   "scripts": {
-    "dev": "npx --yes serve . --listen 3000",
-    "start": "npx --yes serve . --listen 3000"
+    "dev": "node server.js",
+    "start": "node server.js"
   }
 }
 
