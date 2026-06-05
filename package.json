@@ -2,9 +2,11 @@
   "name": "esha-login-yellow-purple",
   "version": "1.0.0",
   "description": "Yellow & purple login page",
+  "main": "server.js",
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js"
-  }
+  },
+  "dependencies": {}
 }
 
