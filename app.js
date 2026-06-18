@@ -1,109 +1,93 @@
-/* ── Login form validation & UX ─────────────────────────────── */
+// ─── Password visibility toggle ────────────────────────────
+const togglePw  = document.getElementById('togglePw');
+const pwInput   = document.getElementById('password');
+const eyeIcon   = document.getElementById('eyeIcon');
 
-const form        = document.getElementById('loginForm');
-const emailInput  = document.getElementById('email');
-const passInput   = document.getElementById('password');
-const emailError  = document.getElementById('emailError');
-const passError   = document.getElementById('passwordError');
-const submitBtn   = document.getElementById('submitBtn');
-const toggleBtn   = document.getElementById('togglePassword');
-const eyeIcon     = document.getElementById('eyeIcon');
-
-/* ── Password visibility toggle ─────────────────────────────── */
 const eyeOpen = `
-  <path d="M2 10s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6z"
-        stroke="currentColor" stroke-width="1.5"/>
-  <circle cx="10" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/>`;
-
+  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+  <circle cx="12" cy="12" r="3"/>
+`;
 const eyeClosed = `
-  <path d="M3 3l14 14M8.5 8.6A3 3 0 0013.4 13.5M6.2 6.3C4.4 7.5 3 10 3 10s3 6 7 6
-           c1.5 0 2.9-.5 4-1.3M10 4c4 0 7 6 7 6s-.6 1.2-1.7 2.4"
-        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>`;
+  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8
+           a18.45 18.45 0 0 1 5.06-5.94"/>
+  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8
+           a18.5 18.5 0 0 1-2.16 3.19"/>
+  <line x1="1" y1="1" x2="23" y2="23"/>
+`;
 
-toggleBtn.addEventListener('click', () => {
-  const isPassword = passInput.type === 'password';
-  passInput.type   = isPassword ? 'text' : 'password';
-  eyeIcon.innerHTML = isPassword ? eyeClosed : eyeOpen;
-  toggleBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+togglePw.addEventListener('click', () => {
+  const show = pwInput.type === 'password';
+  pwInput.type = show ? 'text' : 'password';
+  eyeIcon.innerHTML = show ? eyeClosed : eyeOpen;
 });
 
-/* ── Validation helpers ──────────────────────────────────────── */
-function isValidEmail(v) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+// ─── Form validation & submit ───────────────────────────────
+const form          = document.getElementById('loginForm');
+const emailInput    = document.getElementById('email');
+const emailError    = document.getElementById('emailError');
+const passwordError = document.getElementById('passwordError');
+const submitBtn     = document.getElementById('submitBtn');
+const btnText       = document.getElementById('btnText');
+const btnSpinner    = document.getElementById('btnSpinner');
+
+function validateEmail(value) {
+  if (!value.trim()) return 'Email is required.';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Enter a valid email address.';
+  return '';
+}
+
+function validatePassword(value) {
+  if (!value) return 'Password is required.';
+  if (value.length < 6) return 'Password must be at least 6 characters.';
+  return '';
 }
 
 function setError(input, errorEl, msg) {
-  input.classList.add('is-error');
   errorEl.textContent = msg;
+  if (msg) input.classList.add('invalid');
+  else     input.classList.remove('invalid');
 }
 
-function clearError(input, errorEl) {
-  input.classList.remove('is-error');
-  errorEl.textContent = '';
-}
+// Live validation on blur
+emailInput.addEventListener('blur', () =>
+  setError(emailInput, emailError, validateEmail(emailInput.value)));
 
-/* live validation on blur */
-emailInput.addEventListener('blur', () => {
-  if (!emailInput.value.trim()) {
-    setError(emailInput, emailError, 'Email is required.');
-  } else if (!isValidEmail(emailInput.value)) {
-    setError(emailInput, emailError, 'Please enter a valid email address.');
-  } else {
-    clearError(emailInput, emailError);
-  }
+pwInput.addEventListener('blur', () =>
+  setError(pwInput, passwordError, validatePassword(pwInput.value)));
+
+// Clear error on input
+emailInput.addEventListener('input', () => {
+  if (emailInput.classList.contains('invalid'))
+    setError(emailInput, emailError, validateEmail(emailInput.value));
+});
+pwInput.addEventListener('input', () => {
+  if (pwInput.classList.contains('invalid'))
+    setError(pwInput, passwordError, validatePassword(pwInput.value));
 });
 
-passInput.addEventListener('blur', () => {
-  if (!passInput.value) {
-    setError(passInput, passError, 'Password is required.');
-  } else if (passInput.value.length < 6) {
-    setError(passInput, passError, 'Password must be at least 6 characters.');
-  } else {
-    clearError(passInput, passError);
-  }
-});
-
-/* clear error on input */
-emailInput.addEventListener('input', () => clearError(emailInput, emailError));
-passInput.addEventListener('input',  () => clearError(passInput,  passError));
-
-/* ── Form submit ─────────────────────────────────────────────── */
+// Submit
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  let valid = true;
+  const eErr = validateEmail(emailInput.value);
+  const pErr = validatePassword(pwInput.value);
+  setError(emailInput, emailError, eErr);
+  setError(pwInput, passwordError, pErr);
 
-  if (!emailInput.value.trim()) {
-    setError(emailInput, emailError, 'Email is required.'); valid = false;
-  } else if (!isValidEmail(emailInput.value)) {
-    setError(emailInput, emailError, 'Please enter a valid email address.'); valid = false;
-  }
+  if (eErr || pErr) return;
 
-  if (!passInput.value) {
-    setError(passInput, passError, 'Password is required.'); valid = false;
-  } else if (passInput.value.length < 6) {
-    setError(passInput, passError, 'Password must be at least 6 characters.'); valid = false;
-  }
-
-  if (!valid) return;
-
-  /* simulate async sign-in */
-  submitBtn.classList.add('is-loading');
+  // Show spinner
+  btnText.classList.add('hidden');
+  btnSpinner.classList.remove('hidden');
   submitBtn.disabled = true;
-  submitBtn.querySelector('.btn__text').textContent = 'Signing in';
 
-  await new Promise(r => setTimeout(r, 1800));
+  // Simulate async login
+  await new Promise(r => setTimeout(r, 1500));
 
-  submitBtn.classList.remove('is-loading');
+  btnText.textContent = '✓ Signed In!';
+  btnText.classList.remove('hidden');
+  btnSpinner.classList.add('hidden');
   submitBtn.disabled = false;
-  submitBtn.querySelector('.btn__text').textContent = 'Sign in';
-
-  /* success flash */
-  submitBtn.style.background = 'linear-gradient(135deg, #16A34A 0%, #15803D 100%)';
-  submitBtn.querySelector('.btn__text').textContent = '✓ Signed in!';
-  setTimeout(() => {
-    submitBtn.style.background = '';
-    submitBtn.querySelector('.btn__text').textContent = 'Sign in';
-  }, 2500);
+  document.querySelector('.card').classList.add('success');
 });
 

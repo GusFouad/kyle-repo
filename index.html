@@ -7,148 +7,71 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="page">
+  <div class="background">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
 
-    <!-- Left panel — branding -->
-    <div class="panel panel--brand">
-      <div class="brand">
-        <div class="brand__icon">
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="24" cy="24" r="22" stroke="#FFD600" stroke-width="3"/>
-            <path d="M14 24 L22 32 L34 16" stroke="#FFD600" stroke-width="3.5"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h1 class="brand__name">Forge<span>.</span></h1>
-        <p class="brand__tagline">Build faster. Ship smarter.</p>
-      </div>
-
-      <ul class="features">
-        <li class="features__item">
-          <span class="features__dot"></span>
-          AI-powered code generation
-        </li>
-        <li class="features__item">
-          <span class="features__dot"></span>
-          Git-native sandbox execution
-        </li>
-        <li class="features__item">
-          <span class="features__dot"></span>
-          Persistent knowledge wiki
-        </li>
-      </ul>
-
-      <p class="panel__footer">© 2025 Forge Inc.</p>
+  <div class="card">
+    <div class="card-header">
+      <div class="logo">✦</div>
+      <h1>Welcome back</h1>
+      <p>Sign in to your account</p>
     </div>
 
-    <!-- Right panel — form -->
-    <div class="panel panel--form">
-      <div class="form-card">
-        <div class="form-card__header">
-          <h2 class="form-card__title">Welcome back</h2>
-          <p class="form-card__subtitle">Sign in to your account to continue</p>
-        </div>
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="email">Email address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@example.com"
+          autocomplete="email"
+        />
+        <span class="error" id="emailError"></span>
+      </div>
 
-        <form class="form" id="loginForm" novalidate>
-
-          <div class="field">
-            <label class="field__label" for="email">Email address</label>
-            <div class="field__wrap">
-              <svg class="field__icon" viewBox="0 0 20 20" fill="none">
-                <path d="M2.5 5.5h15v10h-15v-10z" stroke="currentColor" stroke-width="1.5"
-                      stroke-linejoin="round"/>
-                <path d="M2.5 5.5l7.5 6 7.5-6" stroke="currentColor" stroke-width="1.5"
-                      stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <input
-                class="field__input"
-                type="email"
-                id="email"
-                name="email"
-                placeholder="you@example.com"
-                autocomplete="email"
-                required
-              />
-            </div>
-            <span class="field__error" id="emailError"></span>
-          </div>
-
-          <div class="field">
-            <div class="field__label-row">
-              <label class="field__label" for="password">Password</label>
-              <a href="#" class="field__forgot">Forgot password?</a>
-            </div>
-            <div class="field__wrap">
-              <svg class="field__icon" viewBox="0 0 20 20" fill="none">
-                <rect x="4" y="9" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M7 9V6.5a3 3 0 016 0V9" stroke="currentColor" stroke-width="1.5"
-                      stroke-linecap="round"/>
-              </svg>
-              <input
-                class="field__input"
-                type="password"
-                id="password"
-                name="password"
-                placeholder="••••••••"
-                autocomplete="current-password"
-                required
-              />
-              <button type="button" class="field__toggle" id="togglePassword" aria-label="Show password">
-                <svg id="eyeIcon" viewBox="0 0 20 20" fill="none">
-                  <path d="M2 10s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6z" stroke="currentColor" stroke-width="1.5"/>
-                  <circle cx="10" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-                </svg>
-              </button>
-            </div>
-            <span class="field__error" id="passwordError"></span>
-          </div>
-
-          <div class="field field--row">
-            <label class="checkbox">
-              <input type="checkbox" class="checkbox__input" id="remember" />
-              <span class="checkbox__box"></span>
-              <span class="checkbox__label">Remember me for 30 days</span>
-            </label>
-          </div>
-
-          <button type="submit" class="btn btn--primary" id="submitBtn">
-            <span class="btn__text">Sign in</span>
-            <svg class="btn__arrow" viewBox="0 0 20 20" fill="none">
-              <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.8"
-                    stroke-linecap="round" stroke-linejoin="round"/>
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="password-wrap">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+          />
+          <button type="button" class="toggle-pw" id="togglePw" aria-label="Show password">
+            <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
             </svg>
           </button>
-
-          <div class="divider"><span>or continue with</span></div>
-
-          <div class="socials">
-            <button type="button" class="btn btn--social">
-              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 10.2c0-.67-.06-1.32-.17-1.94H10v3.67h5.05a4.32 4.32 0 01-1.87 2.83v2.35h3.02C17.9 15.66 19 13.14 19 10.2z" fill="#4285F4"/>
-                <path d="M10 19c2.54 0 4.67-.84 6.23-2.27l-3.02-2.35c-.84.56-1.92.9-3.21.9-2.47 0-4.56-1.67-5.31-3.91H1.57v2.42A9 9 0 0010 19z" fill="#34A853"/>
-                <path d="M4.69 11.37A5.4 5.4 0 014.4 10c0-.47.08-.93.29-1.37V6.21H1.57A9 9 0 001 10c0 1.45.35 2.82.97 4.03l3.12-2.42-.4-.24z" fill="#FBBC05"/>
-                <path d="M10 4.72c1.39 0 2.64.48 3.62 1.42l2.72-2.72C14.66 1.84 12.53 1 10 1A9 9 0 001.57 6.21L4.69 8.63C5.44 6.39 7.53 4.72 10 4.72z" fill="#EA4335"/>
-              </svg>
-              Google
-            </button>
-            <button type="button" class="btn btn--social">
-              <svg viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M10 1C5.03 1 1 5.03 1 10c0 3.98 2.58 7.35 6.16 8.54.45.08.61-.2.61-.43v-1.5c-2.5.54-3.03-1.2-3.03-1.2-.41-1.04-1-1.32-1-1.32-.82-.56.06-.55.06-.55.9.06 1.38.93 1.38.93.8 1.37 2.1.97 2.61.74.08-.58.31-.97.57-1.19-1.99-.23-4.09-1-4.09-4.44 0-.98.35-1.78.93-2.41-.09-.23-.4-1.14.09-2.37 0 0 .76-.24 2.49.93A8.67 8.67 0 0110 5.8c.77 0 1.54.1 2.26.3 1.73-1.17 2.49-.93 2.49-.93.49 1.23.18 2.14.09 2.37.58.63.93 1.43.93 2.41 0 3.45-2.1 4.21-4.1 4.43.32.28.61.82.61 1.66v2.46c0 .24.16.52.62.43A9.003 9.003 0 0019 10c0-4.97-4.03-9-9-9z"/>
-              </svg>
-              GitHub
-            </button>
-          </div>
-
-        </form>
-
-        <p class="form-card__signup">
-          Don't have an account?
-          <a href="#" class="form-card__signup-link">Create one free</a>
-        </p>
+        </div>
+        <span class="error" id="passwordError"></span>
       </div>
-    </div>
 
+      <div class="row-between">
+        <label class="checkbox-label">
+          <input type="checkbox" id="remember" />
+          <span class="checkmark"></span>
+          Remember me
+        </label>
+        <a href="#" class="link">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn-primary" id="submitBtn">
+        <span id="btnText">Sign In</span>
+        <span id="btnSpinner" class="spinner hidden"></span>
+      </button>
+    </form>
+
+    <p class="footer-text">
+      Don't have an account? <a href="#" class="link">Create one</a>
+    </p>
   </div>
 
   <script src="app.js"></script>
