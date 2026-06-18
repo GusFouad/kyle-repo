@@ -1,0 +1,9 @@
+{
+  "name": "login-page",
+  "version": "1.0.0",
+  "description": "Login page with blue, yellow, purple color scheme",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
+
