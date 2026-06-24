@@ -1,0 +1,10 @@
+{
+  "name": "forge-login",
+  "version": "1.0.0",
+  "description": "Login page — blue, black & yellow colour scheme",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  }
+}
+
