@@ -1,0 +1,9 @@
+{
+  "name": "login-page",
+  "version": "1.0.0",
+  "description": "Green & purple login page",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
+
